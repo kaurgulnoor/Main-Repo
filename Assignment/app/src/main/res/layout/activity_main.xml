@@ -13,7 +13,7 @@
         android:layout_height="58dp"
         android:text="Button"
         tools:layout_editor_absoluteX="123dp"
-        tools:layout_editor_absoluteY="369dp" />
+        tools:layout_editor_absoluteY="554dp" />
 
     <TextView
         android:id="@+id/textView"
@@ -32,4 +32,44 @@
         android:text="Name"
         tools:layout_editor_absoluteX="91dp"
         tools:layout_editor_absoluteY="208dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CheckBox"
+        tools:layout_editor_absoluteX="41dp"
+        tools:layout_editor_absoluteY="276dp" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Switch"
+        tools:layout_editor_absoluteX="250dp"
+        tools:layout_editor_absoluteY="286dp" />
+
+    <RadioButton
+        android:id="@+id/radioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RadioButton"
+        tools:layout_editor_absoluteX="146dp"
+        tools:layout_editor_absoluteY="354dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="113dp"
+        android:layout_height="78dp"
+        app:srcCompat="@drawable/imageview"
+        tools:layout_editor_absoluteX="159dp"
+        tools:layout_editor_absoluteY="443dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="259dp"
+        android:layout_height="74dp"
+        app:srcCompat="@drawable/imageview"
+        tools:layout_editor_absoluteX="91dp"
+        tools:layout_editor_absoluteY="447dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
