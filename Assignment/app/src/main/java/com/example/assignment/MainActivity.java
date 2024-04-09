@@ -2,6 +2,7 @@ package com.example.assignment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -26,29 +27,46 @@ import com.example.assignment.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding variableBinding;
-    private MainViewModel viewModel;
-    ImageView imgView;
-    Switch sw;
+    private Button button;
+    private Button button2;
+    private Switch switch1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        imgView = findViewById(R.id.flagview);
-        sw = findViewById(R.id.switch2);
-        sw.setOnCheckedChangeListener( (btn, isChecked) -> {});
+        button = findViewById(R.id.button);
+        button2 = findViewById(R.id.button2);
+        switch1 = findViewById(R.id.switch1);
 
-        sw.setOnCheckedChangeListener((btn, isChecked) -> {
-            if (isChecked) {
-                RotateAnimation rotate = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f,
-                        Animation.RELATIVE_TO_SELF, 0.5f);
-                rotate.setDuration(5000);
-                rotate.setRepeatCount(Animation.INFINITE);
-                rotate.setInterpolator(new LinearInterpolator());
-                imgView.startAnimation(rotate);
-            } else {
-                imgView.clearAnimation();
-            }
-        });
+        // Set initial focus
+        button.requestFocus();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_DPAD_DOWN:
+                // If button has focus, focus on switch
+                if (button.hasFocus()) {
+                    switch1.requestFocus();
+                    return true;
+                }
+                break;
+            case KeyEvent.KEYCODE_DPAD_RIGHT:
+                // If button has focus, focus on button2
+                if (button.hasFocus()) {
+                    button2.requestFocus();
+                    return true;
+                }
+                break;
+            case KeyEvent.KEYCODE_DPAD_LEFT:
+                // If button2 has focus, focus on button
+                if (button2.hasFocus()) {
+                    button.requestFocus();
+                    return true;
+                }
+                break;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
