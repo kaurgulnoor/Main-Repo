@@ -9,26 +9,6 @@
     tools:layout_editor_absoluteX="48dp" >
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="353dp"
-        android:layout_height="26dp"
-        android:text="Enter Your Email Address"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.189"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="152dp" />
-
-    <EditText
-        android:id="@+id/editTextTextEmailAddress"
-        android:layout_width="390dp"
-        android:layout_height="46dp"
-        android:ems="0"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="178dp" />
-
-    <TextView
         android:id="@+id/textView3"
         android:layout_width="355dp"
         android:layout_height="29dp"
@@ -50,7 +30,7 @@
         tools:layout_editor_absoluteY="272dp" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/button"
         android:layout_width="388dp"
         android:layout_height="69dp"
         android:text="Login"

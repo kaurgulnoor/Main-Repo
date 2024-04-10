@@ -26,52 +26,108 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.MutableLiveData;
+
+import com.example.assignment.databinding.ActivityMainBinding;
 
 
+/**
+ * @author kaurgulnoor
+ *
+ */
 public class MainActivity extends AppCompatActivity {
 
-    Button loginButton;
-    private static final String TAG = "MainActivity";
+    private ActivityMainBinding variableBinding;
+    /**
+     * This hold the text at the center of the field
+     */
+    TextView myText = null;
+    /**
+     * This holds the text field at the center of the screen where the password is to be inputed
+     */
+    EditText et = null;
+    Button btn = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loginButton = findViewById(R.id.loginButton);
-        loginButton.setOnClickListener(clk -> {
-            Intent nextPage = new Intent(MainActivity.this, SecondActivity.class);
-            startActivity(nextPage);
+        EdgeToEdge.enable(this);
+        variableBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(variableBinding.getRoot());
+
+        MutableLiveData<Boolean> isSelected = new MutableLiveData<>();
+
+        myText = findViewById(R.id.textView3);
+        et = findViewById(R.id.editTextNumberPassword);
+        btn = findViewById(R.id.button);
+
+        btn.setOnClickListener( clk -> {
+            String password = et.getText().toString();
+            checkPasswordComplexity(password);
         });
-
-        // Step 2: Add debug messages in all 6 lifecycle functions
-        Log.w(TAG, "In onCreate() - Loading Widgets");
-    }
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.w(TAG, "In onStart()");
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.w(TAG, "In onResume()");
+    /**
+     *This method checks to see of the password meets all the conditions
+     * by checking each character in the inputed password
+     * @param pw is the string to be checked
+     *           returns true if all conditions are met
+     */
+    public boolean checkPasswordComplexity(String pw){
+        boolean foundUpperCase, foundLowerCase, foundNumber, foundSpecial;
+        foundUpperCase = foundLowerCase = foundNumber = foundSpecial = false;
+        for (int i = 0; i < pw.length(); i++) {
+            char c = pw.charAt(i);
+
+            if (Character.isUpperCase(c)) {
+                foundUpperCase = true;
+            } else if (Character.isLowerCase(c)) {
+                foundLowerCase = true;
+            } else if (Character.isDigit(c)) {
+                foundNumber = true;
+            } else if (isSpecialCharacter(c)) {
+                foundSpecial = true;
+            }
+        }
+        int duration = Toast.LENGTH_SHORT;
+        if (!foundUpperCase) {
+            Toast.makeText( getApplicationContext(), "Your password is missing an uppercase letter!", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (!foundLowerCase) {
+            Toast.makeText(getApplicationContext(), "Your password is missing a lowercase letter!", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (!foundNumber) {
+            Toast.makeText( getApplicationContext(), "Your password is missing a Number!", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (!foundSpecial) {
+            Toast.makeText( getApplicationContext(), "Your password is missing a special character!", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.w(TAG, "In onPause()");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.w(TAG, "In onStop()");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.w(TAG, "In onDestroy()");
+    /**
+     * Checks if the character is a special character.
+     *
+     * @param c The character to be checked.
+     * @return  true if the character is one of &#35;&#36;&#37;&#94;&amp;*!&#64;?, false otherwise.
+     */
+    public static boolean isSpecialCharacter(char c){
+        switch(c){
+            case '#':
+            case '$':
+            case '%':
+            case '^':
+            case '&':
+            case '*':
+            case '!':
+            case '@':
+            case '?':
+                return true;
+            default:
+                return false;
+        }
     }
 }

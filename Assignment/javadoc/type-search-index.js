@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"com.example.assignment.databinding","l":"ActivityMainBinding"},{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.example.assignment","l":"MainActivity"}];updateSearchResults();
