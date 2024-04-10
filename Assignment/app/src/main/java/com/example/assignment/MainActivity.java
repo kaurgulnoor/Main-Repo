@@ -1,7 +1,11 @@
 package com.example.assignment;
 
+import static androidx.constraintlayout.widget.StateSet.TAG;
+
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -26,45 +30,48 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button button;
-    private Button button2;
-    private Switch switch1;
+    Button loginButton;
+    private static final String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loginButton = findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(clk -> {
+            Intent nextPage = new Intent(MainActivity.this, SecondActivity.class);
+            startActivity(nextPage);
+        });
 
-        button = findViewById(R.id.button);
-        button2 = findViewById(R.id.button2);
-        switch1 = findViewById(R.id.switch1);
-
-        // Set initial focus
-        button.requestFocus();
+        // Step 2: Add debug messages in all 6 lifecycle functions
+        Log.w(TAG, "In onCreate() - Loading Widgets");
     }
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_DPAD_DOWN:
-                // If button has focus, focus on switch
-                if (button.hasFocus()) {
-                    switch1.requestFocus();
-                    return true;
-                }
-                break;
-            case KeyEvent.KEYCODE_DPAD_RIGHT:
-                // If button has focus, focus on button2
-                if (button.hasFocus()) {
-                    button2.requestFocus();
-                    return true;
-                }
-                break;
-            case KeyEvent.KEYCODE_DPAD_LEFT:
-                // If button2 has focus, focus on button
-                if (button2.hasFocus()) {
-                    button.requestFocus();
-                    return true;
-                }
-                break;
-        }
-        return super.onKeyDown(keyCode, event);
+    protected void onStart() {
+        super.onStart();
+        Log.w(TAG, "In onStart()");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.w(TAG, "In onResume()");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.w(TAG, "In onPause()");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.w(TAG, "In onStop()");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.w(TAG, "In onDestroy()");
     }
 }
